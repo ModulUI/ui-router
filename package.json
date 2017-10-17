@@ -1,12 +1,13 @@
 {
   "name": "modul-ui-router",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./src --out-dir ./lib",
-    "git-pub": "git commit -am 'fix' && git push && npm run build && npm publish"
+    "git-pub": "git commit -am 'fix' && git push && npm run build && npm publish",
+    "prepublish": "npm install && npm run build"
   },
   "repository": {
     "type": "git",
