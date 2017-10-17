@@ -29,7 +29,7 @@ export default class extends React.Component {
     }
 
     render() {
-        const {notFound, location, history} = this.props;
+        const {notFound, location, history, routeWrappers} = this.props;
         return (
             <RouteManager history={history}
                           location={location}
