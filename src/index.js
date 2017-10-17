@@ -13,7 +13,7 @@ export default class extends React.Component {
         notFound: PropTypes.func,
         defaultLayout: PropTypes.func,
         defaultLayerLayout: PropTypes.func,
-        customRouter
+        routeWrappers: PropTypes.arrayOf(PropTypes.func)
     };
 
     constructor(props, context) {
@@ -33,6 +33,7 @@ export default class extends React.Component {
         return (
             <RouteManager history={history}
                           location={location}
+                          routeWrappers={routeWrappers}
                           routes={this.state.allRoutes}
                           notFound={notFound}/>
         );

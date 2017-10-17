@@ -32,7 +32,7 @@ export const generateRouteComponent = ({routeId, props, routeWrappers}) => {
         throw 'RouteId must be set';
 
     if (props.path) {
-        const RouteComponent = getRouteComponent(key, props);
+        const RouteComponent = getRouteComponent(key, props, routeWrappers);
         return (<RouteComponent key={key} {...props} />);
     }
     else if (props.render) {
@@ -42,7 +42,7 @@ export const generateRouteComponent = ({routeId, props, routeWrappers}) => {
 
 export const getRouteComponent = (key, props, routeWrappers) => {
 
-    const {allowAnonymous, layout}=props;
+    const {layout}=props;
     let routeComponent = Route;
 
     if (layout)

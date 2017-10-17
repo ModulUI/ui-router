@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import * as routeHelpers from './helpers'
 import PageManager from './PageManager'
 import LayerManager from './LayerManager'
@@ -15,7 +14,8 @@ export default class extends React.Component {
         notFound: PropTypes.func,
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
-        layersLimit: PropTypes.number
+        layersLimit: PropTypes.number,
+        routeWrappers: PropTypes.arrayOf(PropTypes.func)
     };
 
     static defaultProps = {
@@ -149,13 +149,12 @@ export default class extends React.Component {
 
     componentDidMount() {
         const self = this;
-
-        $(window).keyup(function (e) {
+        window.addEventListener('keyup', function (e) {
             if (e.keyCode == 27) {
                 const lastLayer = self.getLastLayer();
                 lastLayer && self.closeLayer({layerId: lastLayer.layerId});
             }
-        })
+        });
     }
 
     shouldComponentUpdate(props, state) {
@@ -171,12 +170,13 @@ export default class extends React.Component {
     }
 
     render() {
-        const {location, notFound, routes} = this.props;
+        const {location, notFound, routes, routeWrappers} = this.props;
         const {currentPage, layers} = this.state;
 
         return (
             <div className="poss">
                 <PageManager
+                    routeWrappers={routeWrappers}
                     pageLocation={currentPage}
                     location={location}
                     routes={routes}
@@ -185,6 +185,7 @@ export default class extends React.Component {
                 {layers.map(layer => (
                     <LayerManager key={layer.layerId}
                                   {...layer}
+                                  routeWrappers={routeWrappers}
                                   routes={routes.layerRoutes}
                                   onCloseLayer={::this.closeLayer}/>
 

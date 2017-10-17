@@ -10,7 +10,8 @@ export default class extends Component {
         routes: PropTypes.array.isRequired, //роуты слоев
         layerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         location: PropTypes.object.isRequired,
-        onCloseLayer: PropTypes.func.isRequired
+        onCloseLayer: PropTypes.func.isRequired,
+        routeWrappers: PropTypes.arrayOf(PropTypes.func)
     };
 
     constructor(props) {
@@ -25,11 +26,12 @@ export default class extends Component {
     }
 
     componentWillMount() {
-        const {layerId, routes, onCloseLayer} = this.props;
+        const {layerId, routes, onCloseLayer, routeWrappers} = this.props;
 
         const pages = routes.map(route => routeHelpers.generateRouteComponent({
             props: {...route, layerId, onCloseLayer},
-            routeId: route.routeId
+            routeId: route.routeId,
+            routeWrappers
         }));
 
         this.setState({pages});

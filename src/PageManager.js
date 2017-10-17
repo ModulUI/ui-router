@@ -15,7 +15,6 @@ export default class extends React.Component {
         pageLocation: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
         routeWrappers: PropTypes.arrayOf(PropTypes.func)
-
     };
 
     shouldComponentUpdate(nextProps) {
