@@ -4,7 +4,9 @@
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./src --out-dir ./lib",
+    "git-pub": "git commit -am 'fix' && git push && npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -18,13 +20,16 @@
   },
   "homepage": "https://github.com/ModulUI/ui-router#readme",
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "classnames": "^2.1.2",
+    "prop-types": "^15.5.8",
+    "path-to-regexp": "^1.7.0"
   },
   "devDependencies": {
     "path-to-regexp": "^2.0.0",
     "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
+    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   }
 }

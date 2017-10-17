@@ -1,8 +1,7 @@
 import pathToRegexp from 'path-to-regexp'
 import React from 'react'
 import {Route} from 'react-router-dom'
-import LayoutRoute from './customRoutes/LayoutRoute'
-import PrivateRoute from './customRoutes/PrivateRoute'
+import LayoutRoute from './customRoutes/Layout'
 
 
 export const isLayerPage = (routes, location) => {
@@ -27,7 +26,7 @@ export const getRandomKey = () => {
     return Math.floor(Math.random() * (999999999 - 100000000)) + 100000000;
 };
 
-export const generateRouteComponent = ({routeId, props}) => {
+export const generateRouteComponent = ({routeId, props, routeWrappers}) => {
     const key = `page_route_` + routeId;
     if (!routeId)
         throw 'RouteId must be set';
@@ -41,16 +40,17 @@ export const generateRouteComponent = ({routeId, props}) => {
     }
 };
 
-export const getRouteComponent = (key, props) => {
+export const getRouteComponent = (key, props, routeWrappers) => {
 
     const {allowAnonymous, layout}=props;
     let routeComponent = Route;
 
-    if (!allowAnonymous)
-        routeComponent = PrivateRoute(routeComponent);
-
     if (layout)
         routeComponent = LayoutRoute(routeComponent);
+
+    if (routeWrappers && routeWrappers.length > 0)
+        routeWrappers.reduce((routeComponent, wrapper) => wrapper(routeComponent, props), routeComponent);
+
     return routeComponent;
 };
 

@@ -13,7 +13,9 @@ export default class extends React.Component {
         }),
         notFound: PropTypes.func,
         pageLocation: PropTypes.object.isRequired,
-        location: PropTypes.object.isRequired
+        location: PropTypes.object.isRequired,
+        routeWrappers: PropTypes.arrayOf(PropTypes.func)
+
     };
 
     shouldComponentUpdate(nextProps) {
@@ -25,12 +27,12 @@ export default class extends React.Component {
     }
 
     render() {
-        const {routes, pageLocation, notFound: NotFound} = this.props;
+        const {routes, pageLocation, routeWrappers, notFound: NotFound} = this.props;
 
         return (
             <Switch location={pageLocation}>
                 {routes.pageRoutes.map(route =>
-                    generateRouteComponent({props: route, routeId: route.routeId}))}
+                    generateRouteComponent({props: route, routeId: route.routeId, routeWrappers}))}
                 {NotFound && <NotFound/>}
             </Switch>
         );

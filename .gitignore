@@ -1,5 +1,6 @@
 .DS_Store
 RadRouter
 node_modules
+.idea
 
 package-lock.json

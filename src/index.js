@@ -12,7 +12,8 @@ export default class extends React.Component {
         routes: PropTypes.array.isRequired,
         notFound: PropTypes.func,
         defaultLayout: PropTypes.func,
-        defaultLayerLayout: PropTypes.func
+        defaultLayerLayout: PropTypes.func,
+        customRouter
     };
 
     constructor(props, context) {
