@@ -1,7 +1,7 @@
 import pathToRegexp from 'path-to-regexp'
 import React from 'react'
 import {Route} from 'react-router-dom'
-import LayoutRoute from './customRoutes/Layout'
+import LayoutRoute from './LayoutRoute'
 
 
 export const isLayerPage = (routes, location) => {
