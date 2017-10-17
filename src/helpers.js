@@ -49,7 +49,7 @@ export const getRouteComponent = (key, props, routeWrappers) => {
         routeComponent = LayoutRoute(routeComponent);
 
     if (routeWrappers && routeWrappers.length > 0)
-        routeWrappers.reduce((routeComponent, wrapper) => wrapper(routeComponent, props), routeComponent);
+        routeComponent = routeWrappers.reduce((routeComponent, wrapper) => wrapper(routeComponent, props), routeComponent);
 
     return routeComponent;
 };
