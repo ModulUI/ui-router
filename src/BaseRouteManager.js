@@ -2,7 +2,7 @@ import React from 'react'
 import {withRouter} from 'react-router'
 import PropTypes from 'prop-types'
 import * as routeHelpers from './helpers'
-
+import {Switch} from 'react-router-dom'
 
 @withRouter
 export default class extends React.Component {
