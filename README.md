@@ -2,8 +2,8 @@
 Задача данной библиотеки реализовать возможность открытия слоев (страница поверх текущей) на странице при смене урла, но при этой фоновая страница остается без изменений. 
 
 ## Пример конфига выглядит следующим образом
-`
-  {
+```javascript
+  	{
 		products: {
 			path: '/',
 			exact: true,
@@ -30,8 +30,8 @@
 			isLayer: true,
 			layout: ProductExportContainer
 		},
-	}`
+	}```
   
   ## Пример внедрения
-  `<UIRouter 	defaultLayout={InternalLayout} -- мастер страница
-							 routes={routes} - правила для роутинга приложения />`
+  ```javascript <UIRouter 	defaultLayout={InternalLayout} -- мастер страница
+							 routes={routes} - правила для роутинга приложения />```
