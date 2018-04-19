@@ -34,5 +34,7 @@
 ```
   
  ### Пример внедрения
-  ```javascript <UIRouter 	defaultLayout={InternalLayout} -- мастер страница
-							 routes={routes} - правила для роутинга приложения />```
+ ```javascript 
+  <UIRouter 	defaultLayout={InternalLayout} -- мастер страница
+							 routes={routes} - правила для роутинга приложения />
+```
