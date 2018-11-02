@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import * as routeHelpers from './helpers'
 import PageManager from './PageManager'
 import LayerManager from './LayerManager'
-
+import pathToRegexp from 'path-to-regexp'
+import {compileParentPage} from "./comileParentPage";
 
 export default class extends React.Component {
     static propTypes = {
@@ -80,8 +81,9 @@ export default class extends React.Component {
         if (currentLayerRoute) {
             // если слой это первая загружаемая страница, то устанавливаем задний фон дефолтную страницу
             if (this.isCurrentLocation(location)) {
-                const backPageRoute = this.getPageRouteById(currentLayerRoute.parentId);
-                this.currentPage = backPageRoute ? {pathname: backPageRoute.path} : {pathname: '/'};
+                const parentRouteRule = this.getPageRouteById(currentLayerRoute.parentId);
+                const basePagePath = compileParentPage({location, routeRule: currentLayerRoute, parentRouteRule});
+                this.currentPage = basePagePath ? {pathname: basePagePath} : {pathname: '/'}
             }
 
             if (this.layers.length >= this.props.layersLimit) {
