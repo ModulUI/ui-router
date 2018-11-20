@@ -6,8 +6,8 @@ export default (RouteComponent) => {
     class LayoutRoute extends React.Component {
 
         static propTypes = {
-            component: PropTypes.func,
-            layout: PropTypes.func.isRequired
+            component: PropTypes.oneOf([PropTypes.func, PropTypes.object]),
+            layout: PropTypes.oneOf([PropTypes.func, PropTypes.object])
         };
 
         render() {

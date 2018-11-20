@@ -91,12 +91,8 @@ export default class AppComponent extends Component {
 
         return (
             <UIRouter
-                routes={routes}
-                routeWrappers={routeWrappers}
+                {/* ... */}
 
-                defaultLayout={InternalLayer}
-                defaultLayerLayout={SlideLayer}
-                notFound={NotFoundLayer}
                 errorBoundary={ErrorBoundary}
                 loadingComponent={LoadingComponent}
             />
@@ -106,5 +102,5 @@ export default class AppComponent extends Component {
 ```
 
 Примеры файлов:
-- ErrorBoundary => /sr/ErrorBoundary.js
-- LoadingComponent => /sr/LoadingComponent.js
+- ErrorBoundary => /srс/ErrorBoundary.js
+- LoadingComponent => /srс/LoadingComponent.js
