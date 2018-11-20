@@ -2,6 +2,8 @@ import React from 'react'
 import {withRouter} from 'react-router'
 import PropTypes from 'prop-types'
 
+import LoadingComponent from './LoadingComponent';
+import ErrorBoundary from './ErrorBoundary';
 import RouteManager from './RouteManager'
 import * as routeHelpers from './helpers'
 
@@ -12,9 +14,16 @@ export default class extends React.Component {
         routes: PropTypes.array.isRequired,
         notFound: PropTypes.func,
         defaultLayout: PropTypes.func,
-        defaultLayerLayout: PropTypes.func,
+		defaultLayerLayout: PropTypes.func,
+		loadingComponent: PropTypes.func,
+		errorBoundary: PropTypes.func,
         routeWrappers: PropTypes.arrayOf(PropTypes.func)
     };
+
+    static defaultProps = {
+    	loadingComponent: LoadingComponent,
+		errorBoundary: ErrorBoundary
+	};
 
     constructor(props, context) {
         super(props, context);
@@ -29,13 +38,17 @@ export default class extends React.Component {
     }
 
     render() {
-        const {notFound, location, history, routeWrappers} = this.props;
+        const {notFound, location, history, routeWrappers, loadingComponent, errorBoundary} = this.props;
         return (
-            <RouteManager history={history}
-                          location={location}
-                          routeWrappers={routeWrappers}
-                          routes={this.state.allRoutes}
-                          notFound={notFound}/>
+			<RouteManager
+				history={history}
+				location={location}
+				routeWrappers={routeWrappers}
+				routes={this.state.allRoutes}
+				loadingComponent={loadingComponent}
+				errorBoundary={errorBoundary}
+				notFound={notFound}
+			/>
         );
     }
 }
