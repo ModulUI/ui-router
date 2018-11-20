@@ -1,9 +1,8 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import PropTypes from 'prop-types'
 import * as routeHelpers from './helpers'
 import PageManager from './PageManager'
 import LayerManager from './LayerManager'
-import pathToRegexp from 'path-to-regexp'
 import {compileParentPage} from "./comileParentPage";
 
 export default class extends React.Component {
@@ -142,11 +141,12 @@ export default class extends React.Component {
     }
 
     hideLayer(layerId) {
-        const el = $(`[data-layer=${layerId}]`);
-        if (el) {
-            el.removeClass('open');
-            el.addClass('hide');
-        }
+		const el = document.querySelector(`[data-layer=${layerId}]`);
+
+		if (el) {
+			el.classList.remove('open');
+			el.classList.add('hide');
+		}
     }
 
     componentDidMount() {
@@ -172,27 +172,39 @@ export default class extends React.Component {
     }
 
     render() {
-        const {location, notFound, routes, routeWrappers} = this.props;
+        const {
+        	location,
+			notFound,
+			routes,
+			routeWrappers,
+			loadingComponent: LoadingComponent,
+			errorBoundary: ErrorBoundary
+        } = this.props;
+
         const {currentPage, layers} = this.state;
 
         return (
-            <div className="poss">
-                <PageManager
-                    routeWrappers={routeWrappers}
-                    pageLocation={currentPage}
-                    location={location}
-                    routes={routes}
-                    notFound={notFound}/>
+            <ErrorBoundary>
+                <Suspense fallback={LoadingComponent}>
+                    <PageManager
+                        routeWrappers={routeWrappers}
+                        pageLocation={currentPage}
+                        location={location}
+                        routes={routes}
+                        notFound={notFound}
+                    />
 
-                {layers.map(layer => (
-                    <LayerManager key={layer.layerId}
-                                  {...layer}
-                                  routeWrappers={routeWrappers}
-                                  routes={routes.layerRoutes}
-                                  onCloseLayer={::this.closeLayer}/>
-
-                ))}
-            </div>
+                    {layers.map(layer => (
+                        <LayerManager
+                            key={layer.layerId}
+                            {...layer}
+                            routeWrappers={routeWrappers}
+                            routes={routes.layerRoutes}
+                            onCloseLayer={::this.closeLayer}
+                        />
+                    ))}
+				</Suspense>
+            </ErrorBoundary>
         );
     }
 }

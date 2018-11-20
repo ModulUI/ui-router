@@ -1,6 +1,6 @@
 {
   "name": "modul-ui-router",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/ModulUI/ui-router#readme",
   "dependencies": {
-    "classnames": "^2.1.2",
     "prop-types": "^15.5.8",
     "path-to-regexp": "^1.7.0"
   },
@@ -41,7 +40,7 @@
     "babel-register": "6.11.6"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
-    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
+    "react": "^16.6",
+    "react-dom": "^16.6"
   }
 }
