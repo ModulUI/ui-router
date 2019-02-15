@@ -6,8 +6,16 @@ export default (RouteComponent) => {
     class LayoutRoute extends React.Component {
 
         static propTypes = {
-            component: PropTypes.oneOf([PropTypes.func, PropTypes.object]),
-            layout: PropTypes.oneOf([PropTypes.func, PropTypes.object])
+			component: PropTypes.oneOfType([
+				PropTypes.arrayOf(PropTypes.node),
+				PropTypes.node,
+				PropTypes.func
+			]),
+			layout: PropTypes.oneOfType([
+				PropTypes.arrayOf(PropTypes.node),
+				PropTypes.node,
+				PropTypes.func
+			])
         };
 
         render() {
