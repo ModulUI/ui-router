@@ -3,6 +3,7 @@ import {Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import * as routeHelpers from './helpers'
+import LayerIdContext from "./LayerIdContext";
 
 
 export default class extends Component {
@@ -41,6 +42,8 @@ export default class extends Component {
         const {location} = this.props;
         const {pages} = this.state;
 
-        return <Switch location={location}>{pages}</Switch>
+        return <LayerIdContext.Provider value={this.props.layerId}>
+            <Switch location={location}>{pages}</Switch>
+        </LayerIdContext.Provider>
     }
 }

@@ -6,6 +6,7 @@ import LoadingComponent from './LoadingComponent';
 import ErrorBoundary from './ErrorBoundary';
 import RouteManager from './RouteManager'
 import * as routeHelpers from './helpers'
+import LayerIdContext from './LayerIdContext';
 
 
 @withRouter
@@ -52,3 +53,5 @@ export default class extends React.Component {
         );
     }
 }
+
+export {LayerIdContext};
