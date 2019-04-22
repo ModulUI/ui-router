@@ -18,12 +18,14 @@ export default class extends React.Component {
 		defaultLayerLayout: PropTypes.func,
 		loadingComponent: PropTypes.func,
 		errorBoundary: PropTypes.func,
-        routeWrappers: PropTypes.arrayOf(PropTypes.func)
+        routeWrappers: PropTypes.arrayOf(PropTypes.func),
+        withLayerIdContext: PropTypes.bool,
     };
 
     static defaultProps = {
     	loadingComponent: LoadingComponent,
-		errorBoundary: ErrorBoundary
+        errorBoundary: ErrorBoundary,
+        withLayerIdContext: false,
 	};
 
     constructor(props, context) {
@@ -39,7 +41,16 @@ export default class extends React.Component {
     }
 
     render() {
-        const {notFound, location, history, routeWrappers, loadingComponent, errorBoundary} = this.props;
+        const {
+            notFound,
+            location,
+            history,
+            routeWrappers,
+            loadingComponent,
+            errorBoundary,
+            withLayerIdContext
+        } = this.props;
+
         return (
 			<RouteManager
 				history={history}
@@ -48,7 +59,8 @@ export default class extends React.Component {
 				routes={this.state.allRoutes}
 				loadingComponent={loadingComponent}
 				errorBoundary={errorBoundary}
-				notFound={notFound}
+                notFound={notFound}
+                withLayerIdContext={withLayerIdContext}
 			/>
         );
     }

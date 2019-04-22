@@ -12,7 +12,8 @@ export default class extends Component {
         layerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         location: PropTypes.object.isRequired,
         onCloseLayer: PropTypes.func.isRequired,
-        routeWrappers: PropTypes.arrayOf(PropTypes.func)
+        routeWrappers: PropTypes.arrayOf(PropTypes.func),
+        withLayerIdContext: PropTypes.bool
     };
 
     constructor(props) {
@@ -39,11 +40,15 @@ export default class extends Component {
     }
 
     render() {
-        const {location} = this.props;
+        const {location, withLayerIdContext, layerId} = this.props;
         const {pages} = this.state;
 
-        return <LayerIdContext.Provider value={this.props.layerId}>
-            <Switch location={location}>{pages}</Switch>
-        </LayerIdContext.Provider>
+        if (withLayerIdContext) {
+            return <LayerIdContext.Provider value={layerId}>
+                <Switch location={location}>{pages}</Switch>
+            </LayerIdContext.Provider>;
+        }
+
+        return <Switch location={location}>{pages}</Switch>;
     }
 }

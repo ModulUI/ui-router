@@ -15,7 +15,8 @@ export default class extends React.Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         layersLimit: PropTypes.number,
-        routeWrappers: PropTypes.arrayOf(PropTypes.func)
+        routeWrappers: PropTypes.arrayOf(PropTypes.func),
+        withLayerIdContext: PropTypes.bool
     };
 
     static defaultProps = {
@@ -178,7 +179,8 @@ export default class extends React.Component {
 			routes,
 			routeWrappers,
 			loadingComponent: LoadingComponent,
-			errorBoundary: ErrorBoundary
+            errorBoundary: ErrorBoundary,
+            withLayerIdContext
         } = this.props;
 
         const {currentPage, layers} = this.state;
@@ -201,6 +203,7 @@ export default class extends React.Component {
                             routeWrappers={routeWrappers}
                             routes={routes.layerRoutes}
                             onCloseLayer={::this.closeLayer}
+                            withLayerIdContext={withLayerIdContext}
                         />
                     ))}
 				</Suspense>
