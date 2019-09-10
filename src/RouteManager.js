@@ -86,27 +86,25 @@ export default class extends React.Component {
                 this.currentPage = basePagePath ? {pathname: basePagePath} : {pathname: '/'}
             }
 
-            if (this.layers.length >= this.props.layersLimit) {
-                layers.splice(0, 1, this.createLayer(location));
-                this.layers = layers;
-            } else {
-                const locationLayer = this.getLayerByLocation(location);
-                if (locationLayer) { //слой с таким урл уже есть в массиве
-                    const lastLayer = this.getLastLayer();
-                    if (lastLayer != locationLayer) {
-                        layers = layers.filter(s => s != locationLayer);
-                        layers.unshift(this.createLayer(location));
-                        this.layers = layers;
-
-                    } else {
-                        locationLayer.location = location;
-                        this.layers = layers;
-                    }
-                }
-                else {
+            const locationLayer = this.getLayerByLocation(location);
+            if (locationLayer) { //слой с таким урл уже есть в массиве
+                const lastLayer = this.getLastLayer();
+                if (lastLayer != locationLayer) {
+                    layers = layers.filter(s => s != locationLayer);
                     layers.unshift(this.createLayer(location));
                     this.layers = layers;
+
+                } else {
+                    locationLayer.location = location;
+                    this.layers = layers;
                 }
+            } else {
+                if (this.layers.length >= this.props.layersLimit) {
+                    // удаляем самый "нижний" слой из массива
+                    layers.pop();
+                }
+                layers.unshift(this.createLayer(location));
+                this.layers = layers;
             }
         } else {
             const layers = this.layers;
